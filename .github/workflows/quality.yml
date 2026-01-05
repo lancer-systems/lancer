@@ -30,7 +30,9 @@ jobs:
         run: pnpm install
 
       - name: Initialize database
-        run: pnpm --filter @lancer/api exec drizzle-kit push
+        run: |
+          mkdir -p packages/api/data
+          pnpm --filter @lancer/api exec drizzle-kit push
 
       - name: Type check
         run: pnpm typecheck
