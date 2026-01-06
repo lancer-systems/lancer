@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import Database from "better-sqlite3";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 
+import { settings } from "./schemas/settings.schema";
 import { users } from "./schemas/users.schema";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -14,4 +15,9 @@ if (!existsSync(DATA_DIR)) {
 	mkdirSync(DATA_DIR, { recursive: true });
 }
 
-export const database = drizzle(new Database(DB_PATH), { schema: { users } });
+export const database = drizzle(new Database(DB_PATH), {
+	schema: {
+		settings,
+		users,
+	},
+});

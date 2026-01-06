@@ -13,7 +13,7 @@ export default defineConfig(({ command }) => ({
 		...(command === "serve"
 			? VitePluginNode({
 					adapter: "fastify",
-					appPath: "./src/app.ts",
+					appPath: "./src/modules/app.module.ts",
 					exportName: "app",
 					tsCompiler: "esbuild",
 				})
@@ -23,12 +23,16 @@ export default defineConfig(({ command }) => ({
 	build: {
 		outDir: "dist",
 		target: "node22",
-		lib: {
-			entry: "./src/main.ts",
-			formats: ["es"],
-			fileName: "main",
-		},
+		ssr: true,
 		rollupOptions: {
+			input: "./src/main.ts",
+			output: {
+				format: "esm",
+				entryFileNames: "[name].js",
+				chunkFileNames: "[name].js",
+				preserveModules: true,
+				preserveModulesRoot: "src",
+			},
 			external: [
 				/^node:/,
 				"fastify",
@@ -40,6 +44,8 @@ export default defineConfig(({ command }) => ({
 				"nanoid",
 				"zod",
 				"@node-rs/argon2",
+				"@fastify/cookie",
+				"@fastify/jwt",
 			],
 		},
 	},

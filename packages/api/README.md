@@ -47,23 +47,23 @@ The API will be available at `http://localhost:3141`.
 ```
 src/
 ├── main.ts                   # Entry point
-├── modules/
-│   ├── app.module.ts         # Fastify application
-│   ├── common/               # Shared utilities
-│   │   ├── exceptions/       # HTTP exceptions
-│   │   └── middlewares/      # Global middlewares
-│   ├── database/             # Database module
-│   │   ├── database.service.ts
-│   │   ├── schemas/          # Drizzle table schemas
-│   │   ├── entities/         # TypeScript types
-│   │   └── fixtures/         # Test data factories
-│   ├── health/               # Health check module
-│   │   ├── controllers/
-│   │   └── dtos/
-│   └── users/                # Users module
-│       ├── controllers/
-│       ├── dtos/
-│       └── services/
+└── modules/
+    ├── app.module.ts         # Fastify application
+    ├── common/               # Shared utilities
+    │   ├── exceptions/       # HTTP exceptions
+    │   └── middlewares/      # Global middlewares
+    ├── database/             # Database module
+    │   ├── database.service.ts
+    │   ├── schemas/          # Drizzle table schemas
+    │   ├── entities/         # TypeScript types
+    │   └── fixtures/         # Test data factories
+    ├── health/               # Health check module
+    │   ├── controllers/
+    │   └── dtos/
+    └── auth/                 # Authentication module
+        ├── controllers/
+        ├── dtos/
+        └── services/
 ```
 
 ## API Endpoints
@@ -71,7 +71,8 @@ src/
 | Method | Path | Description |
 |--------|------|-------------|
 | GET | `/health` | Health check |
-| POST | `/users/register` | Register a new user |
+| POST | `/auth/register` | Register a new user |
+| POST | `/auth/login` | Login with email/password |
 
 ## Tech Stack
 
@@ -80,3 +81,4 @@ src/
 - **ORM**: [Drizzle ORM](https://orm.drizzle.team/) with SQLite
 - **Database**: SQLite via [better-sqlite3](https://github.com/WiseLibs/better-sqlite3)
 - **Password Hashing**: [Argon2](https://github.com/napi-rs/node-rs/tree/main/packages/argon2)
+- **Authentication**: JWT via [@fastify/jwt](https://github.com/fastify/fastify-jwt) with httpOnly cookies

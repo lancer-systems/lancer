@@ -2,8 +2,8 @@ import type { FastifyInstance } from "fastify";
 
 import { ConflictException } from "~/modules/common/exceptions/http.exception";
 
+import type { LoginResponse } from "../dtos/login.response";
 import { type RegisterRequest, registerRequestValidationSchema } from "../dtos/register.request";
-import type { RegisterResponse } from "../dtos/register.response";
 import * as usersService from "../services/users.service";
 
 export async function registerController(app: FastifyInstance) {
@@ -28,7 +28,7 @@ export async function registerController(app: FastifyInstance) {
 				id: user.id,
 				email: user.email,
 				createdAt: user.createdAt,
-			} satisfies RegisterResponse);
+			} satisfies LoginResponse);
 		},
 	});
 }
