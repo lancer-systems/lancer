@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { nanoid } from "nanoid";
 
-import type { User } from "../entities/user.entity";
+import type { User } from "../entities/user.entity.ts";
 
 export function makeUser(overrides?: Partial<User>): User {
 	return {

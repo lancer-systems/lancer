@@ -1,3 +1,3 @@
-import type { users } from "../schemas/users.schema";
+import type { users } from "../schemas/users.schema.ts";
 
 export type User = typeof users.$inferSelect;

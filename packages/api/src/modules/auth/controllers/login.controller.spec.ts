@@ -1,10 +1,9 @@
 import { faker } from "@faker-js/faker";
 import { describe, expect, it } from "vitest";
 
-import { app } from "~/modules/app.module";
-import { seedUser } from "~/modules/database/seeders/user.seeder";
-
-import type { LoginResponse } from "../dtos/login.response";
+import { app } from "../../app.module.ts";
+import { seedUser } from "../../database/seeders/user.seeder.ts";
+import type { LoginResponse } from "../dtos/login.response.ts";
 
 describe("Login Controller", () => {
 	describe("POST /auth/login", () => {

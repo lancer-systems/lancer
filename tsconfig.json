@@ -1,8 +1,8 @@
 {
 	"compilerOptions": {
 		"target": "ESNext",
-		"module": "ESNext",
-		"moduleResolution": "bundler",
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
 		"lib": ["ESNext"],
 		"strict": true,
 		"skipLibCheck": true,
@@ -10,7 +10,7 @@
 		"allowImportingTsExtensions": true,
 		"resolveJsonModule": true,
 		"verbatimModuleSyntax": true,
-		"types": ["node", "vitest/globals"]
+		"types": ["node"]
 	},
 	"references": [{ "path": "./packages/api" }],
 	"include": [],

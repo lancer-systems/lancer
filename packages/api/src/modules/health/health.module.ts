@@ -1,6 +1,6 @@
 import type { FastifyInstance } from "fastify";
 
-import { healthController } from "./controllers/health.controller";
+import { healthController } from "./controllers/health.controller.ts";
 
 export async function healthModule(app: FastifyInstance) {
 	app.register(healthController, { prefix: "/health" });

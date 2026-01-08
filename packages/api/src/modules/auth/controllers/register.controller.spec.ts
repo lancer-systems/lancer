@@ -1,15 +1,15 @@
 import { faker } from "@faker-js/faker";
 import { describe, expect, it } from "vitest";
 
-import { app } from "~/modules/app.module";
-import { makeUser } from "~/modules/database/fixtures/user.fixture";
-import type { LoginResponse } from "../dtos/login.response";
+import { app } from "../../app.module.ts";
+import { makeUser } from "../../database/fixtures/user.fixture.ts";
+import type { LoginResponse } from "../dtos/login.response.ts";
 
 describe("Register Controller", () => {
 	describe("POST /auth/register", () => {
-		const user = makeUser();
-
 		it("should register a new user", async () => {
+			const user = makeUser();
+
 			const response = await app.inject({
 				method: "POST",
 				url: "/auth/register",

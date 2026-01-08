@@ -1,11 +1,11 @@
 import { verify } from "@node-rs/argon2";
 import type { FastifyInstance } from "fastify";
 
-import { UnauthorizedException } from "~/modules/common/exceptions/http.exception";
-
-import { type LoginRequest, loginRequestValidationSchema } from "../dtos/login.request";
-import type { LoginResponse } from "../dtos/login.response";
-import * as usersService from "../services/users.service";
+import { UnauthorizedException } from "../../common/exceptions/http.exception.ts";
+import { type LoginRequest, loginRequestValidationSchema } from "../dtos/login.request.ts";
+import type { LoginResponse } from "../dtos/login.response.ts";
+import * as jwtService from "../services/jwt.service.ts";
+import * as usersService from "../services/users.service.ts";
 
 export async function loginController(app: FastifyInstance) {
 	app.route<{ Body: LoginRequest }>({
@@ -29,7 +29,7 @@ export async function loginController(app: FastifyInstance) {
 				throw new UnauthorizedException("Invalid email or password");
 			}
 
-			const token = app.jwt.sign({ sub: user.id, email: user.email }, { expiresIn: "7d" });
+			const token = await jwtService.signToken({ sub: user.id, email: user.email });
 
 			reply.setCookie("token", token, {
 				httpOnly: true,

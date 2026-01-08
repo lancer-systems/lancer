@@ -1,6 +1,6 @@
 import type { FastifyError, FastifyInstance } from "fastify";
 
-import { HttpException } from "../exceptions/http.exception";
+import { HttpException } from "../exceptions/http.exception.ts";
 
 export async function errorHandlerMiddleware(app: FastifyInstance) {
 	app.setErrorHandler((error: FastifyError | HttpException, request, reply) => {

@@ -1,11 +1,10 @@
 import { hash } from "@node-rs/argon2";
 import { eq } from "drizzle-orm";
 
-import { database } from "~/modules/database/database.service";
-import type { User } from "~/modules/database/entities/user.entity";
-import { users } from "~/modules/database/schemas/users.schema";
-
-import type { RegisterRequest } from "../dtos/register.request";
+import { database } from "../../database/database.service.ts";
+import type { User } from "../../database/entities/user.entity.ts";
+import { users } from "../../database/schemas/users.schema.ts";
+import type { RegisterRequest } from "../dtos/register.request.ts";
 
 export async function findByEmail(email: string): Promise<User | undefined> {
 	return database.select().from(users).where(eq(users.email, email)).get();

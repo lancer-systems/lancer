@@ -2,3 +2,13 @@ node_modules/
 *.tsbuildinfo
 .DS_Store
 .claude
+CLAUDE.md
+packages/cli
+packages/infrastructure
+
+CONTRIBUTING.md
+README.md
+SECURITY.md
+CODE_OF_CONDUCT.md
+
+.github/ISSUE_TEMPLATE/

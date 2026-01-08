@@ -2,12 +2,12 @@ import type { FastifyError } from "fastify";
 
 export class HttpException extends Error implements FastifyError {
 	public readonly code: string;
+	public readonly statusCode: number;
 
-	constructor(
-		public readonly statusCode: number,
-		message: string,
-	) {
+	constructor(statusCode: number, message: string) {
 		super(message);
+
+		this.statusCode = statusCode;
 		this.name = this.constructor.name;
 		this.code = `HTTP_${statusCode}`;
 	}

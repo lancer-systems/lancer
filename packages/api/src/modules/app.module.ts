@@ -1,5 +1,4 @@
 import cookie from "@fastify/cookie";
-import jwt from "@fastify/jwt";
 import Fastify from "fastify";
 import {
 	serializerCompiler,
@@ -7,13 +6,13 @@ import {
 	type ZodTypeProvider,
 } from "fastify-type-provider-zod";
 
-import { authModule } from "~/modules/auth/auth.module";
-import { getJwtSecret } from "~/modules/auth/services/jwt.service";
-import { errorHandlerMiddleware } from "~/modules/common/middlewares/error-handler.middleware";
-import { healthModule } from "~/modules/health/health.module";
+import { authModule } from "./auth/auth.module.ts";
+import { errorHandlerMiddleware } from "./common/middlewares/error-handler.middleware.ts";
+import { healthModule } from "./health/health.module.ts";
+import { providerModule } from "./provider/provider.module.ts";
 
 const app = Fastify({
-	logger: !process.env.VITEST,
+	logger: process.env.NODE_ENV !== "test",
 }).withTypeProvider<ZodTypeProvider>();
 
 // Setup Zod validation
@@ -22,7 +21,6 @@ app.setSerializerCompiler(serializerCompiler);
 
 // Plugins
 app.register(cookie);
-app.register(jwt, { secret: getJwtSecret() });
 
 // Middlewares
 app.register(errorHandlerMiddleware);
@@ -30,5 +28,6 @@ app.register(errorHandlerMiddleware);
 // Modules
 app.register(authModule);
 app.register(healthModule);
+app.register(providerModule);
 
 export { app };

@@ -26,7 +26,7 @@ This creates the SQLite database at `data/lancer.db` and applies the schema.
 ### 3. Run the development server
 
 ```bash
-pnpm start:dev
+pnpm start:watch
 ```
 
 The API will be available at `http://localhost:3141`.
@@ -35,9 +35,10 @@ The API will be available at `http://localhost:3141`.
 
 | Command | Description |
 |---------|-------------|
-| `pnpm start:dev` | Start development server with hot reload |
-| `pnpm start:prod` | Start production server |
-| `pnpm build` | Build for production |
+| `pnpm start` | Start server |
+| `pnpm start:watch` | Start server with hot reload |
+| `pnpm test` | Run tests |
+| `pnpm test:watch` | Run tests in watch mode |
 | `pnpm exec drizzle-kit push` | Apply schema to database |
 | `pnpm exec drizzle-kit generate` | Generate migration files |
 | `pnpm exec drizzle-kit studio` | Open Drizzle Studio (database GUI) |

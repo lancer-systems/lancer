@@ -1,10 +1,9 @@
 import { sql } from "drizzle-orm";
 import type { FastifyInstance } from "fastify";
 
-import { InternalServerErrorException } from "~/modules/common/exceptions/http.exception";
-import { database } from "~/modules/database/database.service";
-
-import type { HealthResponse } from "../dtos/health.response";
+import { InternalServerErrorException } from "../../common/exceptions/http.exception.ts";
+import { database } from "../../database/database.service.ts";
+import type { HealthResponse } from "../dtos/health.response.ts";
 
 export async function healthController(app: FastifyInstance) {
 	app.route({

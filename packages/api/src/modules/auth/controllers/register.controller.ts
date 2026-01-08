@@ -1,10 +1,9 @@
 import type { FastifyInstance } from "fastify";
 
-import { ConflictException } from "~/modules/common/exceptions/http.exception";
-
-import type { LoginResponse } from "../dtos/login.response";
-import { type RegisterRequest, registerRequestValidationSchema } from "../dtos/register.request";
-import * as usersService from "../services/users.service";
+import { ConflictException } from "../../common/exceptions/http.exception.ts";
+import type { LoginResponse } from "../dtos/login.response.ts";
+import { type RegisterRequest, registerRequestValidationSchema } from "../dtos/register.request.ts";
+import * as usersService from "../services/users.service.ts";
 
 export async function registerController(app: FastifyInstance) {
 	app.route<{ Body: RegisterRequest }>({

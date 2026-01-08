@@ -1,8 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import { app } from "~/modules/app.module";
-
-import type { HealthResponse } from "../dtos/health.response";
+import { app } from "../../app.module.ts";
+import type { HealthResponse } from "../dtos/health.response.ts";
 
 describe("Health Controller", () => {
 	describe("GET /health", () => {

@@ -4,8 +4,8 @@ import { fileURLToPath } from "node:url";
 import Database from "better-sqlite3";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 
-import { settings } from "./schemas/settings.schema";
-import { users } from "./schemas/users.schema";
+import { awsProviders } from "./schemas/aws-providers.schema.ts";
+import { users } from "./schemas/users.schema.ts";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = join(__dirname, "../../../data");
@@ -17,7 +17,7 @@ if (!existsSync(DATA_DIR)) {
 
 export const database = drizzle(new Database(DB_PATH), {
 	schema: {
-		settings,
+		awsProviders,
 		users,
 	},
 });
