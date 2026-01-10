@@ -1,0 +1,9 @@
+{
+	"name": "@lancer/shared",
+	"version": "0.1.0",
+	"type": "module",
+	"exports": {
+		"./constants": "./src/constants/index.ts",
+		"./constants/aws-regions": "./src/constants/aws-regions.ts"
+	}
+}

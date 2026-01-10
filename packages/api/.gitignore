@@ -1,2 +1,4 @@
 data/
 dist/
+openapi.json
+public/

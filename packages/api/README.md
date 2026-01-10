@@ -39,6 +39,7 @@ The API will be available at `http://localhost:3141`.
 | `pnpm start:watch` | Start server with hot reload |
 | `pnpm test` | Run tests |
 | `pnpm test:watch` | Run tests in watch mode |
+| `pnpm generate:openapi` | Generate OpenAPI spec |
 | `pnpm exec drizzle-kit push` | Apply schema to database |
 | `pnpm exec drizzle-kit generate` | Generate migration files |
 | `pnpm exec drizzle-kit studio` | Open Drizzle Studio (database GUI) |
@@ -59,21 +60,20 @@ src/
     │   ├── entities/         # TypeScript types
     │   └── fixtures/         # Test data factories
     ├── health/               # Health check module
-    │   ├── controllers/
-    │   └── dtos/
-    └── auth/                 # Authentication module
-        ├── controllers/
-        ├── dtos/
-        └── services/
+    ├── auth/                 # Authentication module
+    └── provider/             # Cloud provider module
 ```
 
 ## API Endpoints
 
+All endpoints are prefixed with `/api`.
+
 | Method | Path | Description |
 |--------|------|-------------|
-| GET | `/health` | Health check |
-| POST | `/auth/register` | Register a new user |
-| POST | `/auth/login` | Login with email/password |
+| GET  | `/api/health` | Health check |
+| POST | `/api/auth/register` | Register a new user |
+| POST | `/api/auth/login` | Login with email/password |
+| POST | `/api/providers` | Create a cloud provider |
 
 ## Tech Stack
 
@@ -82,4 +82,4 @@ src/
 - **ORM**: [Drizzle ORM](https://orm.drizzle.team/) with SQLite
 - **Database**: SQLite via [better-sqlite3](https://github.com/WiseLibs/better-sqlite3)
 - **Password Hashing**: [Argon2](https://github.com/napi-rs/node-rs/tree/main/packages/argon2)
-- **Authentication**: JWT via [@fastify/jwt](https://github.com/fastify/fastify-jwt) with httpOnly cookies
+- **Authentication**: JWT with httpOnly cookies via [jose](https://github.com/panva/jose)

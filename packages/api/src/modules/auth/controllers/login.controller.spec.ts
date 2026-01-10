@@ -6,13 +6,13 @@ import { seedUser } from "../../database/seeders/user.seeder.ts";
 import type { LoginResponse } from "../dtos/login.response.ts";
 
 describe("Login Controller", () => {
-	describe("POST /auth/login", () => {
+	describe("POST /api/auth/login", () => {
 		it("should login successfully with valid credentials", async () => {
 			const user = await seedUser();
 
 			const response = await app.inject({
 				method: "POST",
-				url: "/auth/login",
+				url: "/api/auth/login",
 				payload: { email: user.email, password: user.password },
 			});
 
@@ -30,7 +30,7 @@ describe("Login Controller", () => {
 
 			const response = await app.inject({
 				method: "POST",
-				url: "/auth/login",
+				url: "/api/auth/login",
 				payload: { email: user.email, password: user.password },
 			});
 
@@ -45,7 +45,7 @@ describe("Login Controller", () => {
 		it("should return 401 for non-existent user", async () => {
 			const response = await app.inject({
 				method: "POST",
-				url: "/auth/login",
+				url: "/api/auth/login",
 				payload: {
 					email: faker.internet.email(),
 					password: faker.internet.password({ length: 12 }),
@@ -61,7 +61,7 @@ describe("Login Controller", () => {
 
 			const response = await app.inject({
 				method: "POST",
-				url: "/auth/login",
+				url: "/api/auth/login",
 				payload: {
 					email: user.email,
 					password: "wrong-password-123",
@@ -75,7 +75,7 @@ describe("Login Controller", () => {
 		it("should return 400 for invalid email format", async () => {
 			const response = await app.inject({
 				method: "POST",
-				url: "/auth/login",
+				url: "/api/auth/login",
 				payload: {
 					email: "not-an-email",
 					password: faker.internet.password({ length: 12 }),
@@ -88,7 +88,7 @@ describe("Login Controller", () => {
 		it("should return 400 for missing password", async () => {
 			const response = await app.inject({
 				method: "POST",
-				url: "/auth/login",
+				url: "/api/auth/login",
 				payload: {
 					email: faker.internet.email(),
 				},

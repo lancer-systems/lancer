@@ -17,6 +17,8 @@ export async function createProviderController(app: FastifyInstance) {
 		url: "/",
 		onRequest: [authGuard],
 		schema: {
+			tags: ["providers"],
+			operationId: "createProvider",
 			body: createProviderRequestSchema,
 		},
 		handler: async ({ body }, reply) => {

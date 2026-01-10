@@ -9,6 +9,10 @@ export async function healthController(app: FastifyInstance) {
 	app.route({
 		method: "GET",
 		url: "/",
+		schema: {
+			tags: ["health"],
+			operationId: "getHealth",
+		},
 		handler: async (_, reply) => {
 			try {
 				database.get(sql`SELECT 1`);

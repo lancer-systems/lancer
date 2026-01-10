@@ -1,6 +1,5 @@
+import { awsRegions } from "@lancer/shared/constants";
 import { z } from "zod";
-
-import { awsRegions } from "../constants/aws-regions.ts";
 
 const awsProviderSchema = z.object({
 	name: z

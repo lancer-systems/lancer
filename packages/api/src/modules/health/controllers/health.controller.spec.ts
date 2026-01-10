@@ -4,11 +4,11 @@ import { app } from "../../app.module.ts";
 import type { HealthResponse } from "../dtos/health.response.ts";
 
 describe("Health Controller", () => {
-	describe("GET /health", () => {
+	describe("GET /api/health", () => {
 		it("should return healthy status", async () => {
 			const response = await app.inject({
 				method: "GET",
-				url: "/health",
+				url: "/api/health",
 			});
 
 			const body = response.json<HealthResponse>();

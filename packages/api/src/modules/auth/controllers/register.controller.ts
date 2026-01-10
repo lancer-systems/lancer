@@ -10,6 +10,8 @@ export async function registerController(app: FastifyInstance) {
 		method: "POST",
 		url: "/register",
 		schema: {
+			tags: ["auth"],
+			operationId: "register",
 			body: registerRequestValidationSchema,
 		},
 		handler: async ({ body }, reply) => {

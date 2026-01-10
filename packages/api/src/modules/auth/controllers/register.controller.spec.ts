@@ -6,13 +6,13 @@ import { makeUser } from "../../database/fixtures/user.fixture.ts";
 import type { LoginResponse } from "../dtos/login.response.ts";
 
 describe("Register Controller", () => {
-	describe("POST /auth/register", () => {
+	describe("POST /api/auth/register", () => {
 		it("should register a new user", async () => {
 			const user = makeUser();
 
 			const response = await app.inject({
 				method: "POST",
-				url: "/auth/register",
+				url: "/api/auth/register",
 				payload: { email: user.email, password: user.password },
 			});
 
@@ -28,7 +28,7 @@ describe("Register Controller", () => {
 		it("should return 400 for invalid email", async () => {
 			const res = await app.inject({
 				method: "POST",
-				url: "/auth/register",
+				url: "/api/auth/register",
 				payload: {
 					email: "invalid",
 					password: faker.internet.password({ length: 12 }),
@@ -41,7 +41,7 @@ describe("Register Controller", () => {
 		it("should return 400 for short password", async () => {
 			const res = await app.inject({
 				method: "POST",
-				url: "/auth/register",
+				url: "/api/auth/register",
 				payload: {
 					email: faker.internet.email(),
 					password: faker.internet.password({ length: 4 }),
@@ -56,13 +56,13 @@ describe("Register Controller", () => {
 
 			await app.inject({
 				method: "POST",
-				url: "/auth/register",
+				url: "/api/auth/register",
 				payload: { email: user.email, password: user.password },
 			});
 
 			const response = await app.inject({
 				method: "POST",
-				url: "/auth/register",
+				url: "/api/auth/register",
 				payload: { email: user.email, password: user.password },
 			});
 

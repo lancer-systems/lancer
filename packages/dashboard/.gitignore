@@ -1,0 +1,9 @@
+node_modules
+dist
+
+# Generated files
+src/lib/api/
+
+# Playwright
+playwright-report/
+test-results/

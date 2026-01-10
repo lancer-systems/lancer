@@ -7,9 +7,37 @@ on:
       - main
 
 jobs:
-  quality:
+  lint-typecheck:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Type check
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+  api-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout repository
@@ -34,11 +62,44 @@ jobs:
           mkdir -p packages/api/data
           pnpm --filter @lancer/api exec drizzle-kit push
 
-      - name: Type check
-        run: pnpm typecheck
+      - name: API Tests
+        run: pnpm --filter @lancer/api test
 
-      - name: Lint
-        run: pnpm lint
+  e2e-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
 
-      - name: Tests
-        run: pnpm test
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build Dashboard
+        run: pnpm --filter @lancer/dashboard build
+
+      - name: Install Playwright browsers
+        run: pnpm --filter @lancer/dashboard exec playwright install --with-deps chromium
+
+      - name: Run e2e tests
+        run: pnpm --filter @lancer/dashboard test:e2e
+
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: packages/dashboard/playwright-report/
+          retention-days: 7

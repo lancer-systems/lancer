@@ -12,6 +12,8 @@ export async function loginController(app: FastifyInstance) {
 		method: "POST",
 		url: "/login",
 		schema: {
+			tags: ["auth"],
+			operationId: "login",
 			body: loginRequestValidationSchema,
 		},
 		handler: async ({ body }, reply) => {

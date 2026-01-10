@@ -12,7 +12,7 @@ vi.mock("../services/aws.service.ts", () => ({
 }));
 
 describe("Create Provider Controller", () => {
-	describe("POST /providers", () => {
+	describe("POST /api/providers", () => {
 		let token: string;
 
 		beforeEach(async () => {
@@ -33,7 +33,7 @@ describe("Create Provider Controller", () => {
 
 			const response = await app.inject({
 				method: "POST",
-				url: "/providers",
+				url: "/api/providers",
 				headers: { cookie: `token=${token}` },
 				payload: {
 					name: providerName,
@@ -58,7 +58,7 @@ describe("Create Provider Controller", () => {
 		it("should return 401 without authentication", async () => {
 			const response = await app.inject({
 				method: "POST",
-				url: "/providers",
+				url: "/api/providers",
 				payload: {
 					name: "my-provider",
 					type: "aws",
@@ -81,7 +81,7 @@ describe("Create Provider Controller", () => {
 
 			await app.inject({
 				method: "POST",
-				url: "/providers",
+				url: "/api/providers",
 				headers: { cookie: `token=${token}` },
 				payload: {
 					name: providerName,
@@ -94,7 +94,7 @@ describe("Create Provider Controller", () => {
 
 			const response = await app.inject({
 				method: "POST",
-				url: "/providers",
+				url: "/api/providers",
 				headers: { cookie: `token=${token}` },
 				payload: {
 					name: providerName,
@@ -114,7 +114,7 @@ describe("Create Provider Controller", () => {
 
 			const response = await app.inject({
 				method: "POST",
-				url: "/providers",
+				url: "/api/providers",
 				headers: { cookie: `token=${token}` },
 				payload: {
 					name: `bad-creds-${faker.string.alphanumeric(8).toLowerCase()}`,
@@ -132,7 +132,7 @@ describe("Create Provider Controller", () => {
 		it("should return 400 for invalid name format", async () => {
 			const response = await app.inject({
 				method: "POST",
-				url: "/providers",
+				url: "/api/providers",
 				headers: { cookie: `token=${token}` },
 				payload: {
 					name: "Invalid Name With Spaces",
@@ -149,7 +149,7 @@ describe("Create Provider Controller", () => {
 		it("should return 400 for invalid region", async () => {
 			const response = await app.inject({
 				method: "POST",
-				url: "/providers",
+				url: "/api/providers",
 				headers: { cookie: `token=${token}` },
 				payload: {
 					name: `region-test-${faker.string.alphanumeric(8).toLowerCase()}`,

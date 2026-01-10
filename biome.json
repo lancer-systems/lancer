@@ -21,6 +21,12 @@
 		"indentStyle": "tab",
 		"lineWidth": 100
 	},
+	"css": {
+		"parser": {
+			"cssModules": true,
+			"tailwindDirectives": true
+		}
+	},
 	"javascript": {
 		"formatter": {
 			"quoteStyle": "double",

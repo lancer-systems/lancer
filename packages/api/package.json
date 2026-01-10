@@ -9,11 +9,15 @@
 		"start": "node src/main.ts",
 		"start:watch": "node --watch src/main.ts",
 		"test": "vitest run",
-		"test:watch": "vitest"
+		"test:watch": "vitest",
+		"generate:openapi": "node src/scripts/generate-openapi.ts"
 	},
 	"dependencies": {
+		"@lancer/shared": "workspace:*",
 		"@aws-sdk/client-sts": "^3.962.0",
 		"@fastify/cookie": "^11.0.2",
+		"@fastify/static": "^9.0.0",
+		"@fastify/swagger": "^9.6.1",
 		"@node-rs/argon2": "^2.0.2",
 		"better-sqlite3": "^11.7.0",
 		"drizzle-orm": "^0.45.1",
