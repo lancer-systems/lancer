@@ -6,7 +6,7 @@ import {
 	type CreateProviderRequest,
 	createProviderRequestSchema,
 } from "../dtos/create-provider.request.ts";
-import type { AwsProviderResponse } from "../dtos/provider.response.ts";
+import { type AwsProviderResponse, awsProviderResponseSchema } from "../dtos/provider.response.ts";
 import * as awsService from "../services/aws.service.ts";
 import * as awsProviderService from "../services/aws-provider.service.ts";
 import * as providerService from "../services/provider.service.ts";
@@ -20,6 +20,9 @@ export async function createProviderController(app: FastifyInstance) {
 			tags: ["providers"],
 			operationId: "createProvider",
 			body: createProviderRequestSchema,
+			response: {
+				201: awsProviderResponseSchema,
+			},
 		},
 		handler: async ({ body }, reply) => {
 			const existing = providerService.findByName(body.type, body.name);

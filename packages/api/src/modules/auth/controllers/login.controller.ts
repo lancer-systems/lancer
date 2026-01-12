@@ -3,7 +3,7 @@ import type { FastifyInstance } from "fastify";
 import { UnauthorizedException } from "../../common/exceptions/http.exception.ts";
 import * as usersAdapter from "../adapters/user.adapter.ts";
 import { type LoginRequest, loginRequestValidationSchema } from "../dtos/login.request.ts";
-import type { LoginResponse } from "../dtos/login.response.ts";
+import { type LoginResponse, loginResponseSchema } from "../dtos/login.response.ts";
 import * as jwtService from "../services/jwt.service.ts";
 import * as passwordService from "../services/password.service.ts";
 
@@ -21,6 +21,9 @@ export async function loginController(app: FastifyInstance) {
 			tags: ["auth"],
 			operationId: "login",
 			body: loginRequestValidationSchema,
+			response: {
+				200: loginResponseSchema,
+			},
 		},
 		handler: async ({ body }, reply) => {
 			const { email, password } = body;

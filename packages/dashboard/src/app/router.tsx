@@ -2,12 +2,14 @@ import { Route, Switch } from "wouter";
 
 import { LoginPage } from "./routes/login.tsx";
 import { CreateProviderPage } from "./routes/providers/create.tsx";
+import { ProvidersPage } from "./routes/providers/index.tsx";
 
 export function AppRouter() {
 	return (
 		<Switch>
 			<Route path="/login" component={LoginPage} />
-			<Route path="/providers/new" component={CreateProviderPage} />
+			<Route path="/providers" component={ProvidersPage} />
+			<Route path="/providers/create" component={CreateProviderPage} />
 			<Route path="/">
 				<div className="flex min-h-screen items-center justify-center bg-background text-foreground">
 					<h1 className="text-2xl font-bold">Lancer Dashboard</h1>

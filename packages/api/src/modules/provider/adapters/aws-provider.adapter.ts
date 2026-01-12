@@ -23,6 +23,12 @@ export function findByName(name: string): AwsProvider | undefined {
 	return toAwsProvider(provider);
 }
 
+export function findAll(): AwsProvider[] {
+	const providers = database.select().from(awsProviders).all();
+
+	return providers.map((provider) => toAwsProvider(provider));
+}
+
 export function create(request: CreateProviderRequest): AwsProvider {
 	const [provider] = database.insert(awsProviders).values(request).returning().all();
 

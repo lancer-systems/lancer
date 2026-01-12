@@ -1,5 +1,9 @@
-export interface LoginResponse {
-	id: string;
-	email: string;
-	createdAt: Date;
-}
+import { z } from "zod";
+
+export const loginResponseSchema = z.object({
+	id: z.string(),
+	email: z.string(),
+	createdAt: z.date(),
+});
+
+export type LoginResponse = z.infer<typeof loginResponseSchema>;
