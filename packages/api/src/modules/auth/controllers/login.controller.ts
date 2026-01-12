@@ -1,16 +1,22 @@
-import { verify } from "@node-rs/argon2";
 import type { FastifyInstance } from "fastify";
 
 import { UnauthorizedException } from "../../common/exceptions/http.exception.ts";
+import * as usersAdapter from "../adapters/user.adapter.ts";
 import { type LoginRequest, loginRequestValidationSchema } from "../dtos/login.request.ts";
 import type { LoginResponse } from "../dtos/login.response.ts";
 import * as jwtService from "../services/jwt.service.ts";
-import * as usersService from "../services/users.service.ts";
+import * as passwordService from "../services/password.service.ts";
 
 export async function loginController(app: FastifyInstance) {
-	app.route<{ Body: LoginRequest }>({
+	app.route<{ Body: LoginRequest; Reply: LoginResponse }>({
 		method: "POST",
 		url: "/login",
+		config: {
+			rateLimit: {
+				max: 5,
+				timeWindow: "1 minute",
+			},
+		},
 		schema: {
 			tags: ["auth"],
 			operationId: "login",
@@ -19,13 +25,13 @@ export async function loginController(app: FastifyInstance) {
 		handler: async ({ body }, reply) => {
 			const { email, password } = body;
 
-			const user = await usersService.findByEmail(email);
+			const user = usersAdapter.findByEmail(email);
 
 			if (!user) {
 				throw new UnauthorizedException("Invalid email or password");
 			}
 
-			const isValidPassword = await verify(user.password, password);
+			const isValidPassword = await passwordService.verifyPassword(user.password, password);
 
 			if (!isValidPassword) {
 				throw new UnauthorizedException("Invalid email or password");
@@ -45,7 +51,7 @@ export async function loginController(app: FastifyInstance) {
 				id: user.id,
 				email: user.email,
 				createdAt: user.createdAt,
-			} satisfies LoginResponse);
+			});
 		},
 	});
 }

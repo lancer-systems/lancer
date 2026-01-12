@@ -58,10 +58,16 @@ src/
     │   ├── database.service.ts
     │   ├── schemas/          # Drizzle table schemas
     │   ├── entities/         # TypeScript types
-    │   └── fixtures/         # Test data factories
+    │   ├── fixtures/         # Shared test fixtures
+    │   └── seeders/          # Shared test seeders
     ├── health/               # Health check module
     ├── auth/                 # Authentication module
+    ├── bootstrap/            # Bootstrap module (initial setup)
+    │   ├── fixtures/         # Module-specific fixtures
+    │   └── guards/           # Route guards
     └── provider/             # Cloud provider module
+        ├── fixtures/         # Module-specific fixtures
+        └── seeders/          # Module-specific seeders
 ```
 
 ## API Endpoints
@@ -71,7 +77,7 @@ All endpoints are prefixed with `/api`.
 | Method | Path | Description |
 |--------|------|-------------|
 | GET  | `/api/health` | Health check |
-| POST | `/api/auth/register` | Register a new user |
+| POST | `/api/bootstrap` | Initial setup (admin + provider) |
 | POST | `/api/auth/login` | Login with email/password |
 | POST | `/api/providers` | Create a cloud provider |
 
@@ -83,3 +89,15 @@ All endpoints are prefixed with `/api`.
 - **Database**: SQLite via [better-sqlite3](https://github.com/WiseLibs/better-sqlite3)
 - **Password Hashing**: [Argon2](https://github.com/napi-rs/node-rs/tree/main/packages/argon2)
 - **Authentication**: JWT with httpOnly cookies via [jose](https://github.com/panva/jose)
+- **CORS**: Enabled via [@fastify/cors](https://github.com/fastify/fastify-cors)
+- **Rate Limiting**: Via [@fastify/rate-limit](https://github.com/fastify/fastify-rate-limit)
+
+## Security
+
+- CORS enabled (all origins, credentials supported)
+- Rate limiting on sensitive endpoints:
+  - Login: 5 requests/minute per IP
+  - Bootstrap: 3 requests/hour per IP
+- JWT tokens with 7-day expiry
+- Argon2 password hashing
+- AES-256-GCM credential encryption

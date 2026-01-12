@@ -6,7 +6,7 @@ import { database } from "../../database/database.service.ts";
 import type { HealthResponse } from "../dtos/health.response.ts";
 
 export async function healthController(app: FastifyInstance) {
-	app.route({
+	app.route<{ Reply: HealthResponse }>({
 		method: "GET",
 		url: "/",
 		schema: {
@@ -17,7 +17,7 @@ export async function healthController(app: FastifyInstance) {
 			try {
 				database.get(sql`SELECT 1`);
 
-				return reply.send({ status: "healthy", database: "connected" } satisfies HealthResponse);
+				return reply.send({ status: "healthy", database: "connected" });
 			} catch {
 				throw new InternalServerErrorException("Database connection failed");
 			}

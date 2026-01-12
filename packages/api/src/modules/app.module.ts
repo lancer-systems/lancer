@@ -1,6 +1,8 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import cookie from "@fastify/cookie";
+import cors from "@fastify/cors";
+import rateLimit from "@fastify/rate-limit";
 import fastifyStatic from "@fastify/static";
 import fastifySwagger from "@fastify/swagger";
 import Fastify from "fastify";
@@ -12,6 +14,7 @@ import {
 } from "fastify-type-provider-zod";
 
 import { authModule } from "./auth/auth.module.ts";
+import { bootstrapModule } from "./bootstrap/bootstrap.module.ts";
 import { errorHandlerMiddleware } from "./common/middlewares/error-handler.middleware.ts";
 import { healthModule } from "./health/health.module.ts";
 import { providerModule } from "./provider/provider.module.ts";
@@ -28,6 +31,16 @@ app.setSerializerCompiler(serializerCompiler);
 
 // Plugins
 app.register(cookie);
+
+// CORS - Allow all origins (API accessible from installer, CLI, dashboard)
+// Security is handled by Bearer tokens and httpOnly cookies
+app.register(cors, { origin: true, credentials: true });
+
+// Rate limiting - configured per-route, not global
+// Disabled in test environment to avoid test interference
+if (process.env.NODE_ENV !== "test") {
+	app.register(rateLimit, { global: false });
+}
 
 // OpenAPI/Swagger documentation
 app.register(fastifySwagger, {
@@ -52,6 +65,7 @@ app.register(errorHandlerMiddleware);
 
 // Modules (all under /api prefix)
 app.register(authModule, { prefix: "/api" });
+app.register(bootstrapModule, { prefix: "/api" });
 app.register(healthModule, { prefix: "/api" });
 app.register(providerModule, { prefix: "/api" });
 

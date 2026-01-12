@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
           version: 10
 
@@ -35,7 +35,7 @@ jobs:
       - name: Lint
         run: pnpm lint
 
-  api-tests:
+  tests:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -44,7 +44,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
           version: 10
 
@@ -57,13 +57,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Initialize database
-        run: |
-          mkdir -p packages/api/data
-          pnpm --filter @lancer/api exec drizzle-kit push
-
       - name: API Tests
         run: pnpm --filter @lancer/api test
+
+      - name: Infrastructure Tests
+        run: pnpm --filter @lancer/infrastructure test
 
   e2e-tests:
     runs-on: ubuntu-latest
@@ -74,7 +72,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
           version: 10
 

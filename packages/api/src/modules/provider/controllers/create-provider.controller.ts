@@ -12,7 +12,7 @@ import * as awsProviderService from "../services/aws-provider.service.ts";
 import * as providerService from "../services/provider.service.ts";
 
 export async function createProviderController(app: FastifyInstance) {
-	app.route<{ Body: CreateProviderRequest }>({
+	app.route<{ Body: CreateProviderRequest; Reply: AwsProviderResponse }>({
 		method: "POST",
 		url: "/",
 		onRequest: [authGuard],
@@ -57,7 +57,7 @@ export async function createProviderController(app: FastifyInstance) {
 						region: provider.region,
 						accountId: provider.accountId,
 						createdAt: provider.createdAt,
-					} satisfies AwsProviderResponse);
+					});
 				}
 			}
 		},

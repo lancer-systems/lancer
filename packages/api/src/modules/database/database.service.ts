@@ -6,14 +6,14 @@ import { drizzle } from "drizzle-orm/better-sqlite3";
 import { awsProviders } from "./schemas/aws-providers.schema.ts";
 import { users } from "./schemas/users.schema.ts";
 
-const DATA_DIR = join(import.meta.dirname, "../../../data");
-const DB_PATH = join(DATA_DIR, "lancer.db");
+const dataDir = join(import.meta.dirname, "../../../data");
+const dbPath = join(dataDir, "lancer.db");
 
-if (!existsSync(DATA_DIR)) {
-	mkdirSync(DATA_DIR, { recursive: true });
+if (!existsSync(dataDir)) {
+	mkdirSync(dataDir, { recursive: true });
 }
 
-export const database = drizzle(new Database(DB_PATH), {
+export const database = drizzle(new Database(dbPath), {
 	schema: {
 		awsProviders,
 		users,

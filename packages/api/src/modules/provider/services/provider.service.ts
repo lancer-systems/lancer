@@ -1,10 +1,11 @@
-import type { ProviderType } from "../../database/entities/provider.entity.ts";
-import * as awsProviderService from "./aws-provider.service.ts";
+import * as awsProviderAdapter from "../adapters/aws-provider.adapter.ts";
+
+export type ProviderType = "aws";
 
 export function findByName(type: ProviderType, name: string) {
 	switch (type) {
 		case "aws":
-			return awsProviderService.findByName(name);
+			return awsProviderAdapter.findByName(name);
 		default:
 			return null;
 	}
