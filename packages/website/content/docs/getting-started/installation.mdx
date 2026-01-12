@@ -1,0 +1,76 @@
+---
+title: Installation
+description: Install Lancer on your cloud provider
+---
+
+## Quick Install
+
+Run this command in your terminal:
+
+```bash
+curl -fsSL https://get.lancer.run | bash
+```
+
+## Installation Steps
+
+The installer will guide you through the following steps:
+
+### 1. Cloud Provider Credentials
+
+Choose how to provide your credentials. For AWS:
+
+- **AWS CLI Profile**: Select from your configured profiles
+- **Manual Entry**: Enter Access Key ID, Secret Access Key, and region
+
+The installer validates your credentials before proceeding.
+
+### 2. Admin Account
+
+Create your admin account:
+
+- **Email**: Your login email
+- **Password**: At least 8 characters
+
+### 3. Cost Confirmation
+
+Review the estimated monthly cost and confirm to proceed.
+
+### 4. Deployment
+
+The installer will:
+
+1. Create a state storage bucket
+2. Deploy the foundation infrastructure
+3. Deploy the Lancer API
+4. Wait for the API to become healthy
+5. Create your admin account
+
+This typically takes 5-10 minutes.
+
+### 5. Success
+
+Once complete, you'll see:
+
+```
+✓ Lancer is ready!
+
+  URL: http://your-lancer-instance.example.com
+  Admin: your@email.com
+
+Happy deploying!
+```
+
+## Dry Run Mode
+
+To preview what will be created without deploying:
+
+```bash
+curl -fsSL https://get.lancer.run | bash -s -- --dry-run
+```
+
+This shows all resources that would be created without actually creating them.
+
+## Next Steps
+
+1. [Access your dashboard](/docs/dashboard)
+2. [Add cloud providers](/docs/dashboard/providers)

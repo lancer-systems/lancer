@@ -1,0 +1,50 @@
+---
+title: Architecture
+description: How Lancer works under the hood
+---
+
+Lancer deploys a lightweight infrastructure to your cloud provider that manages your applications.
+
+## Overview
+
+Lancer consists of:
+
+- **Foundation**: Shared infrastructure (networking, load balancing, container orchestration)
+- **Lancer API**: The dashboard and API that manages deployments
+
+## AWS Architecture
+
+When using AWS as a cloud provider:
+
+### Foundation Infrastructure
+
+- **VPC**: Virtual Private Cloud with 2 public subnets
+- **Application Load Balancer (ALB)**: Routes traffic to your services
+- **ECS Cluster**: Manages container orchestration
+- **IAM Roles**: Permissions for ECS instances
+
+### Lancer API
+
+The API runs as an ECS service and provides:
+
+- Dashboard web interface
+- REST API for deployments
+- Authentication and user management
+
+## Design Principles
+
+### Cost Optimization
+
+Lancer is designed to minimize cloud costs:
+
+- **No NAT Gateway**: Uses public subnets only
+- **Shared Load Balancer**: One load balancer for all services
+- **ECS on EC2**: More cost-effective than Fargate for small workloads
+- **ARM instances**: Uses Graviton (t4g) instances where available
+
+### Security
+
+- All traffic routed through load balancer with HTTPS support
+- Security groups isolate services
+- Database credentials stored encrypted
+- EBS volumes encrypted at rest

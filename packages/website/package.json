@@ -1,0 +1,24 @@
+{
+	"name": "@lancer/website",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"start:watch": "next dev",
+		"build": "next build"
+	},
+	"dependencies": {
+		"fumadocs-core": "^15.5.0",
+		"fumadocs-mdx": "^11.6.1",
+		"fumadocs-ui": "^15.5.0",
+		"next": "^15.3.4",
+		"react": "^19.2.0",
+		"react-dom": "^19.2.0",
+		"tailwindcss": "^4.1.18"
+	},
+	"devDependencies": {
+		"@tailwindcss/postcss": "^4.1.18",
+		"@types/react": "^19.2.5",
+		"@types/react-dom": "^19.2.3"
+	}
+}

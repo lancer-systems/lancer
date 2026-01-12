@@ -1,0 +1,29 @@
+---
+title: Cost Breakdown
+description: Estimated cloud costs
+---
+
+Lancer is designed to be cost-effective. Here's a breakdown of expected costs for AWS.
+
+## AWS Base Infrastructure
+
+These costs apply as soon as you install Lancer:
+
+| Component | Description | Monthly Cost |
+|-----------|-------------|--------------|
+| ALB | Application Load Balancer | ~$16 |
+| Lancer API | t4g.nano EC2 instance (ARM) | ~$3 |
+| **Total Base** | | **~$19/month** |
+
+## Cost Savings
+
+Lancer uses several strategies to reduce costs:
+
+1. **No NAT Gateway**: Saves ~$32/month by using public subnets
+2. **Shared ALB**: One load balancer for all services
+3. **ARM instances**: Graviton instances are ~20% cheaper than x86
+4. **Right-sized instances**: Start small and scale as needed
+
+## AWS Free Tier
+
+The ALB costs (~$16/month) still apply even during the AWS Free Tier period. The t4g.nano instance is not covered by Free Tier but is very cost-effective at ~$3/month.

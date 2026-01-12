@@ -1,0 +1,49 @@
+---
+title: Providers
+description: Manage cloud provider credentials
+---
+
+Providers store the credentials Lancer uses to deploy resources to your cloud accounts.
+
+## Default Provider
+
+During installation, Lancer creates a default provider using the credentials you provided. This provider is used for all deployments unless you specify otherwise.
+
+## Supported Providers
+
+Currently, Lancer supports:
+
+- **AWS**: Amazon Web Services
+
+## Adding a Provider
+
+To add a new provider:
+
+1. Navigate to **Providers** in the dashboard
+2. Click **Add Provider**
+3. Select the provider type (e.g., AWS)
+4. Fill in the required credentials
+5. Click **Create**
+
+Lancer validates your credentials before saving.
+
+### AWS Provider Configuration
+
+For AWS providers, you'll need:
+
+- **Name**: A unique identifier (lowercase, alphanumeric, hyphens allowed)
+- **Region**: The AWS region for deployments
+- **Access Key ID**: Your AWS access key
+- **Secret Access Key**: Your AWS secret key
+
+## Provider Security
+
+- Credentials are stored encrypted in the database
+- Access keys are never displayed after creation
+- Each provider is isolated to its cloud account
+
+## Best Practices
+
+- Use dedicated IAM users with limited permissions for each provider
+- Rotate credentials regularly
+- Use separate providers for different environments (staging, production)

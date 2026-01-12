@@ -1,0 +1,55 @@
+---
+title: Prerequisites
+description: What you need before installing Lancer
+---
+
+Before installing Lancer, make sure you have the following:
+
+## Node.js 22+
+
+Lancer requires Node.js 22 or later. Check your version:
+
+```bash
+node --version
+```
+
+If you need to install or update Node.js, visit [nodejs.org](https://nodejs.org/).
+
+## Cloud Provider Account
+
+Currently, Lancer supports **AWS**. You need an AWS account with:
+
+- **Access Key ID** and **Secret Access Key** with administrator permissions
+- Or an **AWS CLI profile** configured with appropriate permissions
+
+### Creating AWS Credentials
+
+1. Go to the [AWS IAM Console](https://console.aws.amazon.com/iam/)
+2. Navigate to **Users** → **Create user**
+3. Give the user a name (e.g., `lancer-admin`)
+4. Attach the **AdministratorAccess** policy
+5. Create an access key under **Security credentials**
+
+Keep your Access Key ID and Secret Access Key safe. You'll need them during installation.
+
+## Pulumi (Optional)
+
+Lancer uses Pulumi to manage infrastructure. The installer will automatically install Pulumi if it's not already present.
+
+If you prefer to install it manually:
+
+```bash
+curl -fsSL https://get.pulumi.com | sh
+```
+
+## Cost Estimate (AWS)
+
+Running Lancer on AWS will cost approximately **$19/month**:
+
+| Component | Cost |
+|-----------|------|
+| Foundation (VPC, ALB, ECS Cluster) | ~$16/month |
+| Lancer API (t4g.nano EC2, ARM) | ~$3/month |
+| **Total** | **~$19/month** |
+
+This is the base cost. Additional services you deploy will incur extra charges.
