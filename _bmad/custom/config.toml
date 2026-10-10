@@ -1,0 +1,21 @@
+# Team / enterprise overrides for _bmad/config.toml.
+# Committed to the repo — applies to every developer on the project.
+# Tables deep-merge over base config; keyed entries merge by key.
+# Example: override an agent descriptor, or add a new agent.
+#
+# [agents.bmad-agent-pm]
+# description = "Prefers short, bulleted PRDs over narrative drafts."
+
+# The answers every contributor shares, so a fresh clone renders the
+# workflows without a personal _bmad/config.user.toml: render_skill.py halts
+# on a missing communication_language or user_skill_level. Lancer is an
+# open-source project: agents speak and write English by default. A
+# contributor who wants another language sets it in
+# _bmad/custom/config.user.toml, which is gitignored and wins over this file.
+[core]
+project_name = "lancer"
+communication_language = "English"
+document_output_language = "English"
+
+[modules.bmm]
+user_skill_level = "intermediate"
