@@ -1,0 +1,21 @@
+name: Feature request
+description: Something Lancer should do that it does not.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What you are trying to deploy or manage, and what stops you today.
+    validations:
+      required: true
+  - type: textarea
+    id: elsewhere
+    attributes:
+      label: How other platforms handle it
+      description: How Render, Heroku or another platform does it, if they do. Say so if none does.
+  - type: textarea
+    id: context
+    attributes:
+      label: Anything else
+      description: Alternatives you considered, the AWS services involved, or the cost you expect.
