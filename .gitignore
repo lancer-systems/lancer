@@ -1,16 +1,16 @@
 node_modules/
 *.tsbuildinfo
 .DS_Store
-.claude
-CLAUDE.md
-packages/infrastructure
 
-CONTRIBUTING.md
-README.md
-SECURITY.md
-CODE_OF_CONDUCT.md
+# Local secrets.
+.env
+.env.*
+!.env.example
 
-.github/ISSUE_TEMPLATE/
+# Personal Claude Code settings. `.claude/skills` is committed: it links to
+# the BMAD skills in `.agents/skills`.
+.claude/settings.local.json
 
-AGENTS.md
-openspec
+# BMAD's per-person install answers; the shared ones live in
+# _bmad/custom/config.toml.
+_bmad/config.user.toml

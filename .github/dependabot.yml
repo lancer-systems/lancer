@@ -1,0 +1,23 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    # One pull request for the week's minor and patch bumps rather than one
+    # per package. A major stays alone, since it is the one that breaks
+    # something.
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+  - package-ecosystem: docker
+    directory: "/packages/api"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
